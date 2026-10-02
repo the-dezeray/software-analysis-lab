@@ -1,0 +1,23 @@
+************* Module app.cli
+app\cli.py:6:0: C0116: Missing function or method docstring (missing-function-docstring)
+app\cli.py:2:0: W0611: Unused save_tasks imported from app.tasks (unused-import)
+app\cli.py:2:0: W0611: Unused add_task imported from app.tasks (unused-import)
+************* Module app.storage
+app\storage.py:4:36: C0303: Trailing whitespace (trailing-whitespace)
+app\storage.py:12:99: C0303: Trailing whitespace (trailing-whitespace)
+app\storage.py:5:39: W0511: TODO: move to env var before release (fixme)
+************* Module app.tasks
+app\tasks.py:59:54: C0303: Trailing whitespace (trailing-whitespace)
+app\tasks.py:80:58: C0303: Trailing whitespace (trailing-whitespace)
+app\tasks.py:11:12: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+app\tasks.py:11:12: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+app\tasks.py:19:9: W1514: Using open without explicitly specifying an encoding (unspecified-encoding)
+app\tasks.py:23:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
+app\tasks.py:63:0: R1710: Either all return statements in a function should return an expression, or none of them should. (inconsistent-return-statements)
+app\tasks.py:72:4: C0200: Consider using enumerate instead of iterating with range and len (consider-using-enumerate)
+app\tasks.py:81:4: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
+app\tasks.py:81:7: C0121: Comparison 'is_premium == True' should be 'is_premium is True' if checking for the singleton value True, or 'is_premium' if testing for truthiness (singleton-comparison)
+
+-----------------------------------
+Your code has been rated at 7.78/10
+

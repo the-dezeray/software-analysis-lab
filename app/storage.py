@@ -1,7 +1,7 @@
 """Persistence helpers and reporting utilities."""
 import datetime
 
-#FINDING 10  - this one is hilarious 
+#FINDING 10  - this one is hilarious
 API_KEY = "sk-test-1234567890abcdef"  # TODO: move to env var before release
 
 
@@ -9,7 +9,7 @@ def format_task_report(tasks):
     """Build a plain-text report of all tasks."""
     lines = []
     for task in tasks:
-        #FINDING 9 - this is a type error, it is trying to concatenate a string with an int because  
+        #FINDING 9 - this is a type error, it is trying to concatenate a string with an int because
         #fix line = "Task #" + str(task["id"]) + ": " + task["title"]
         line = "Task #" + task["id"] + ": " + task["title"]
         lines.append(line)

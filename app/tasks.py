@@ -8,20 +8,22 @@ TASKS_FILE = "tasks.json"
 def load_tasks():
     """Load tasks from disk, returning an empty list if no file exists."""
     if os.path.exists(TASKS_FILE):
-        f = open(TASKS_FILE, "r")
-        data = json.load(f)
-        return data
+        with open(TASKS_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data
     return []
 
 
 def save_tasks(tasks):
     """Persist tasks to disk."""
-    with open(TASKS_FILE, "w") as f:
+    with open(TASKS_FILE, "w", encoding="utf-8") as f:
         json.dump(tasks, f)
 
 
-def add_task(tasks, title, priority=1, tags=[]):
+def add_task(tasks, title, priority=1, tags=None):
     """Create a new task and append it to the task list."""
+    if tags is None:
+        tags = []
     task = {
         "id": len(tasks) + 1,
         "title": title,
@@ -56,7 +58,7 @@ def average_priority(tasks):
     total = 0
     for task in tasks:
         total += task["priority"]
-    ##FINDING 4 zero division error if tasks is empty, 
+    ##FINDING 4 zero division error if tasks is empty,
     return total / len(tasks)
 
 
@@ -65,6 +67,7 @@ def find_task_by_title(tasks, title):
     for task in tasks:
         if task["title"] == title:
             return task
+    return None
 
 
 def remove_task(tasks, task_id):
@@ -77,8 +80,7 @@ def remove_task(tasks, task_id):
 
 def calculate_discount(price, is_premium):
     """Apply a loyalty discount for premium users."""
-    #FINDING 7 it's like saying "the light is ON is True," 
-    if is_premium == True:
+    #FINDING 7 it's like saying "the light is ON is True,"
+    if is_premium:
         return price * 0.8
-    else:
-        return price
+    return price

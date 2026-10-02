@@ -1,0 +1,8 @@
+************* Module app.storage
+app\storage.py:5:39: W0511: TODO: move to env var before release (fixme)
+************* Module app.tasks
+app\tasks.py:75:4: C0200: Consider using enumerate instead of iterating with range and len (consider-using-enumerate)
+
+------------------------------------------------------------------
+Your code has been rated at 9.73/10 (previous run: 7.78/10, +1.96)
+
