@@ -14,15 +14,17 @@ from utils.healing import add_button_fallbacks, heal
 
 
 class TaskPage:
-    def __init__(self, page, base_url: str, use_healing: bool = False):
+    def __init__(self, page, base_url: str, use_healing: bool = False, default_query: str = ""):
         self.page = page
         self.base_url = base_url
         self.use_healing = use_healing
+        self.default_query = default_query
         self.last_healing = None  # record dict from the most recent heal() call
 
     # -- navigation ------------------------------------------------------
     def goto(self, query: str = "") -> None:
-        q = query if (not query or query.startswith("?")) else f"?{query}"
+        q = query or self.default_query
+        q = q if (not q or q.startswith("?")) else f"?{q}"
         self.page.goto(f"{self.base_url}/{q}")
 
     def goto_clean(self, query: str = "") -> None:

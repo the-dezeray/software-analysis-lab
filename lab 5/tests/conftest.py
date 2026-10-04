@@ -47,8 +47,12 @@ def task_page(page, base_url, request):
     from pages.task_page import TaskPage
 
     use_healing = request.config.getoption("--heal", default=False)
-    return TaskPage(page, base_url, use_healing=use_healing)
+    drift = request.config.getoption("--drift", default=False)
+    return TaskPage(page, base_url, use_healing=use_healing,
+                    default_query="?shuffle=1" if drift else "")
 
 
 def pytest_addoption(parser):
     parser.addoption("--heal", action="store_true", help="enable self-healing locators")
+    parser.addoption("--drift", action="store_true",
+                     help="serve the drifted UI (?shuffle=1 renames #add-btn -> #add-btn-v2)")

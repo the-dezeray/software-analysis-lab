@@ -1,7 +1,47 @@
 [
   {
     "element": "add-button",
-    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:54672/?shuffle=1'> selector='#add-btn'>",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:1957/?shuffle=1'> selector='#add-btn'>",
+    "healedWith": "role:button[name=Add]",
+    "healed": true,
+    "confidence": 0.95,
+    "ms": 1547
+  },
+  {
+    "element": "add-button",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:1957/?shuffle=1'> selector='#add-btn'>",
+    "healedWith": "role:button[name=Add]",
+    "healed": true,
+    "confidence": 0.95,
+    "ms": 1516
+  },
+  {
+    "element": "add-button",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:1957/?shuffle=1'> selector='#add-btn'>",
+    "healedWith": "role:button[name=Add]",
+    "healed": true,
+    "confidence": 0.95,
+    "ms": 1535
+  },
+  {
+    "element": "add-button",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:1957/?shuffle=1'> selector='#add-btn'>",
+    "healedWith": "role:button[name=Add]",
+    "healed": true,
+    "confidence": 0.95,
+    "ms": 1525
+  },
+  {
+    "element": "add-button",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:1957/?shuffle=1'> selector='#add-btn'>",
+    "healedWith": "role:button[name=Add]",
+    "healed": true,
+    "confidence": 0.95,
+    "ms": 1527
+  },
+  {
+    "element": "add-button",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:1957/?shuffle=1'> selector='#add-btn'>",
     "healedWith": "role:button[name=Add]",
     "healed": true,
     "confidence": 0.95,

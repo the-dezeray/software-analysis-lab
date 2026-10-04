@@ -1,8 +1,10 @@
 """Lab 5: five data-driven Playwright tests (no hard-coded values in tests).
 
 Run green baseline:   pytest "lab 5/tests" -v
-Run with healing:     pytest "lab 5/tests" -v --heal
-Drift simulation:     serve web/index.html with ?shuffle=1 (renames #add-btn).
+Drift, healing OFF:    pytest "lab 5/tests" --drift -q       # Step 7: expect 5 failed (TimeoutError)
+Drift, healing ON:     pytest "lab 5/tests" --drift --heal -v # Step 8: expect 5 passed (self-healed)
+Drift mechanism: --drift serves every page with ?shuffle=1, which renames
+#add-btn -> #add-btn-v2 (same DOM effect as editing the HTML id by hand).
 """
 from __future__ import annotations
 
