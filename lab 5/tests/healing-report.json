@@ -1,0 +1,10 @@
+[
+  {
+    "element": "add-button",
+    "broken": "<Locator frame=<Frame name= url='http://127.0.0.1:54672/?shuffle=1'> selector='#add-btn'>",
+    "healedWith": "role:button[name=Add]",
+    "healed": true,
+    "confidence": 0.95,
+    "ms": 1525
+  }
+]

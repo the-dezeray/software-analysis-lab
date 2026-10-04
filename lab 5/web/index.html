@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Task Manager — Lab 5 Target App</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 2rem auto; padding: 0 1rem; }
+  #task-list { list-style: none; padding: 0; }
+  #task-list li { padding: .4rem .6rem; border: 1px solid #ddd; margin: .3rem 0;
+                  display: flex; justify-content: space-between; align-items: center; }
+  #task-list li.done span.title { text-decoration: line-through; color: #888; }
+  .hidden { display: none !important; }
+  #error { color: #b00; min-height: 1.2em; }
+  .row { display: flex; gap: .5rem; margin-bottom: .5rem; }
+</style>
+</head>
+<body>
+<h1>Task Manager</h1>
+<p><small>Lab 5 target app. Mirrors <code>app/tasks.py</code> semantics (add / complete / pending / persistence).</small></p>
+
+<div class="row">
+  <input id="task-input" data-testid="task-input" type="text" placeholder="New task title" aria-label="Task title" />
+  <select id="priority-input" data-testid="priority-input" aria-label="Priority">
+    <option value="1">P1</option>
+    <option value="2" selected>P2</option>
+    <option value="3">P3</option>
+  </select>
+  <button id="add-btn" data-testid="add-btn" class="btn-add" type="button">Add</button>
+</div>
+<div id="error" role="alert" aria-live="polite"></div>
+
+<div class="row">
+  <button id="filter-all" data-testid="filter-all" type="button">Show all</button>
+  <button id="filter-pending" data-testid="filter-pending" type="button">Show pending</button>
+  <button id="clear-btn" data-testid="clear-btn" type="button">Clear all</button>
+</div>
+
+<ul id="task-list" data-testid="task-list"></ul>
+
+<script>
+(function () {
+  "use strict";
+  var STORE_KEY = "lab5.tasks";
+  // Flakiness hooks: ?flaky=1 enables random render delay (0-1200ms);
+  // ?shuffle=1 renames #add-btn id on load (simulates UI drift).
+  var params = new URLSearchParams(window.location.search);
+  window.__FLAKY__ = params.get("flaky") === "1";
+  window.__RENDER_DELAY__ = 0;
+
+  function load() {
+    try { return JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); }
+    catch (e) { return []; }
+  }
+  function save(tasks) { localStorage.setItem(STORE_KEY, JSON.stringify(tasks)); }
+
+  function render() {
+    var tasks = load();
+    var list = document.getElementById("task-list");
+    var showPendingOnly = document.body.dataset.filter === "pending";
+    function paint() {
+      list.innerHTML = "";
+      tasks.forEach(function (t) {
+        if (showPendingOnly && t.done) return;
+        var li = document.createElement("li");
+        li.dataset.title = t.title;
+        if (t.done) li.classList.add("done");
+        var span = document.createElement("span");
+        span.className = "title";
+        span.textContent = t.title + " (P" + t.priority + ")";
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "complete-btn";
+        btn.dataset.complete = t.title;
+        btn.textContent = t.done ? "Done" : "Complete";
+        btn.disabled = !!t.done;
+        btn.addEventListener("click", function () { completeTask(t.title); });
+        li.appendChild(span);
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+    }
+    if (window.__FLAKY__) {
+      window.__RENDER_DELAY__ = Math.floor(Math.random() * 1200);
+      setTimeout(paint, window.__RENDER_DELAY__);
+    } else {
+      paint();
+    }
+  }
+
+  function showError(msg) { document.getElementById("error").textContent = msg || ""; }
+
+  function addTask(title, priority) {
+    title = (title || "").trim();
+    if (!title) { showError("Title is required"); return false; }
+    showError("");
+    var tasks = load();
+    tasks.push({ id: tasks.length + 1, title: title, priority: priority || 2, done: false });
+    save(tasks);
+    render();
+    return true;
+  }
+
+  function completeTask(title) {
+    var tasks = load();
+    var found = false;
+    tasks.forEach(function (t) { if (t.title === title) { t.done = true; found = true; } });
+    if (found) { save(tasks); render(); }
+    return found;
+  }
+
+  document.getElementById("add-btn").addEventListener("click", function () {
+    var title = document.getElementById("task-input").value;
+    var prio = parseInt(document.getElementById("priority-input").value, 10) || 2;
+    if (addTask(title, prio)) document.getElementById("task-input").value = "";
+  });
+  document.getElementById("filter-pending").addEventListener("click", function () {
+    document.body.dataset.filter = "pending"; render();
+  });
+  document.getElementById("filter-all").addEventListener("click", function () {
+    document.body.dataset.filter = "all"; render();
+  });
+  document.getElementById("clear-btn").addEventListener("click", function () {
+    localStorage.removeItem(STORE_KEY);
+    document.body.dataset.filter = "all"; render();
+  });
+
+  if (params.get("shuffle") === "1") {
+    // Simulate UI drift: rename the Add button id after load.
+    var btn = document.getElementById("add-btn");
+    if (btn) btn.id = "add-btn-v2";
+  }
+
+  // Expose for tests / debugging.
+  window.__tasks__ = { load: load, save: save, addTask: addTask, completeTask: completeTask, render: render };
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+[
+  { "id": "add-valid", "title": "Write lab report", "priority": 2, "expect": "visible" },
+  { "id": "add-empty", "title": "", "priority": 2, "expect": "rejected" },
+  { "id": "complete", "title": "Buy milk", "priority": 1, "expect": "done" },
+  { "id": "pending-filter", "title": "Filter me", "priority": 3, "expect": "filtered" },
+  { "id": "persistence", "title": "Persist me", "priority": 2, "expect": "persisted" }
+]
