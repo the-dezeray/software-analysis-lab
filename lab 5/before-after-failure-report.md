@@ -15,11 +15,18 @@ by hand, and reversible so the green baseline stays intact).
 | pending-filter | PASS | FAIL — `TimeoutError` on `#add-btn` | PASS |
 | persistence | PASS | FAIL — `TimeoutError` on `#add-btn` | PASS |
 
-Actual runs:
-- Baseline: `pytest "lab 5/tests" -v` → **5 passed** (≈2.4 s).
-- Drift, no healing: `pytest "lab 5/tests" --drift -q` → **5 failed in 157.38 s**, every failure
+Actual runs (from the repo root):
+
+```powershell
+pytest "lab 5/tests" -v              # baseline → 5 passed (≈2.4 s)
+pytest "lab 5/tests" --drift -q      # Step 7, healing OFF → 5 failed in 157.38 s
+pytest "lab 5/tests" --drift --heal -v  # Step 8, healing ON → 5 passed in 11.82 s
+```
+
+- Baseline: **5 passed** (≈2.4 s).
+- Drift, no healing: `pytest "lab 5/tests" --drift -q` → **5 failed in 157.38 s** (above), every failure
   `playwright._impl._errors.TimeoutError: Locator.click: Timeout 30000ms exceeded … waiting for locator("#add-btn")`.
-- Drift, healing: `pytest "lab 5/tests" --drift --heal -v` → **5 passed in 11.82 s**.
+- Drift, healing: `pytest "lab 5/tests" --drift --heal -v` → **5 passed in 11.82 s** (above).
 
 ## Why everything fails without healing
 

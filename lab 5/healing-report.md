@@ -29,6 +29,14 @@ twice), all `broken: #add-btn` → `healedWith: role:button[name=Add]`, `confide
 `~1525 ms` each (one primary-visibility timeout before fallback kicks in). Screenshots:
 `screenshots/failure-no-heal.png`, `screenshots/healed.png`.
 
+## Reproduce (from the repo root)
+
+```powershell
+pytest "lab 5/tests" -v              # baseline → 5 passed (≈2.4 s)
+pytest "lab 5/tests" --drift -q      # healing OFF → 5 failed (TimeoutError on #add-btn)
+pytest "lab 5/tests" --drift --heal -v  # healing ON → 5 passed in 11.82 s, 6 heals logged
+```
+
 ## Short analysis
 
 - **Success rate: 5/5 tests (6/6 healed lookups), 0 wrong-element heals.** The role+accessible-name
