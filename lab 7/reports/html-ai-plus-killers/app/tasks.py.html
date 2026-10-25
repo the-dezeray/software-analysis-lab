@@ -1,0 +1,362 @@
+<html><body><h1>app/tasks.py</h1>Killed 10 out of 43 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 1</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -2,7 +2,7 @@
+ import json
+ import os
+ 
+-TASKS_FILE = "tasks.json"
++TASKS_FILE = "XXtasks.jsonXX"
+ 
+ 
+ def load_tasks():
+</pre><h3>Mutant 2</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -2,7 +2,7 @@
+ import json
+ import os
+ 
+-TASKS_FILE = "tasks.json"
++TASKS_FILE = None
+ 
+ 
+ def load_tasks():
+</pre><h3>Mutant 3</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -8,7 +8,7 @@
+ def load_tasks():
+     """Load tasks from disk, returning an empty list if no file exists."""
+     if os.path.exists(TASKS_FILE):
+-        with open(TASKS_FILE, "r", encoding="utf-8") as f:
++        with open(TASKS_FILE, "XXrXX", encoding="utf-8") as f:
+             data = json.load(f)
+             return data
+     return []
+</pre><h3>Mutant 4</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -8,7 +8,7 @@
+ def load_tasks():
+     """Load tasks from disk, returning an empty list if no file exists."""
+     if os.path.exists(TASKS_FILE):
+-        with open(TASKS_FILE, "r", encoding="utf-8") as f:
++        with open(TASKS_FILE, "r", encoding="XXutf-8XX") as f:
+             data = json.load(f)
+             return data
+     return []
+</pre><h3>Mutant 5</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -9,7 +9,7 @@
+     """Load tasks from disk, returning an empty list if no file exists."""
+     if os.path.exists(TASKS_FILE):
+         with open(TASKS_FILE, "r", encoding="utf-8") as f:
+-            data = json.load(f)
++            data = None
+             return data
+     return []
+ 
+</pre><h3>Mutant 6</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -16,7 +16,7 @@
+ 
+ def save_tasks(tasks):
+     """Persist tasks to disk."""
+-    with open(TASKS_FILE, "w", encoding="utf-8") as f:
++    with open(TASKS_FILE, "XXwXX", encoding="utf-8") as f:
+         json.dump(tasks, f)
+ 
+ 
+</pre><h3>Mutant 7</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -16,7 +16,7 @@
+ 
+ def save_tasks(tasks):
+     """Persist tasks to disk."""
+-    with open(TASKS_FILE, "w", encoding="utf-8") as f:
++    with open(TASKS_FILE, "w", encoding="XXutf-8XX") as f:
+         json.dump(tasks, f)
+ 
+ 
+</pre><h3>Mutant 8</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -20,7 +20,7 @@
+         json.dump(tasks, f)
+ 
+ 
+-def add_task(tasks, title, priority=1, tags=None):
++def add_task(tasks, title, priority=2, tags=None):
+     """Create a new task and append it to the task list."""
+     if tags is None:
+         tags = []
+</pre><h3>Mutant 9</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -22,7 +22,7 @@
+ 
+ def add_task(tasks, title, priority=1, tags=None):
+     """Create a new task and append it to the task list."""
+-    if tags is None:
++    if tags is not None:
+         tags = []
+     task = {
+         "id": len(tasks) + 1,
+</pre><h3>Mutant 10</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -23,7 +23,7 @@
+ def add_task(tasks, title, priority=1, tags=None):
+     """Create a new task and append it to the task list."""
+     if tags is None:
+-        tags = []
++        tags = None
+     task = {
+         "id": len(tasks) + 1,
+         "title": title,
+</pre><h3>Mutant 15</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -27,7 +27,7 @@
+     task = {
+         "id": len(tasks) + 1,
+         "title": title,
+-        "priority": priority,
++        "XXpriorityXX": priority,
+         "tags": tags,
+         "done": False,
+     }
+</pre><h3>Mutant 16</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -28,7 +28,7 @@
+         "id": len(tasks) + 1,
+         "title": title,
+         "priority": priority,
+-        "tags": tags,
++        "XXtagsXX": tags,
+         "done": False,
+     }
+     tasks.append(task)
+</pre><h3>Mutant 17</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -29,7 +29,7 @@
+         "title": title,
+         "priority": priority,
+         "tags": tags,
+-        "done": False,
++        "XXdoneXX": False,
+     }
+     tasks.append(task)
+     return task
+</pre><h3>Mutant 18</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -29,7 +29,7 @@
+         "title": title,
+         "priority": priority,
+         "tags": tags,
+-        "done": False,
++        "done": True,
+     }
+     tasks.append(task)
+     return task
+</pre><h3>Mutant 20</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -38,7 +38,7 @@
+ def complete_task(tasks, task_id):
+     """Mark a task as done by id."""
+     for task in tasks:
+-        if task["id"] == task_id:
++        if task["XXidXX"] == task_id:
+             task["done"] = True
+             return True
+     return False
+</pre><h3>Mutant 21</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -38,7 +38,7 @@
+ def complete_task(tasks, task_id):
+     """Mark a task as done by id."""
+     for task in tasks:
+-        if task["id"] == task_id:
++        if task["id"] != task_id:
+             task["done"] = True
+             return True
+     return False
+</pre><h3>Mutant 22</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -39,7 +39,7 @@
+     """Mark a task as done by id."""
+     for task in tasks:
+         if task["id"] == task_id:
+-            task["done"] = True
++            task["XXdoneXX"] = True
+             return True
+     return False
+ 
+</pre><h3>Mutant 23</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -39,7 +39,7 @@
+     """Mark a task as done by id."""
+     for task in tasks:
+         if task["id"] == task_id:
+-            task["done"] = True
++            task["done"] = False
+             return True
+     return False
+ 
+</pre><h3>Mutant 24</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -39,7 +39,7 @@
+     """Mark a task as done by id."""
+     for task in tasks:
+         if task["id"] == task_id:
+-            task["done"] = True
++            task["done"] = None
+             return True
+     return False
+ 
+</pre><h3>Mutant 25</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -40,7 +40,7 @@
+     for task in tasks:
+         if task["id"] == task_id:
+             task["done"] = True
+-            return True
++            return False
+     return False
+ 
+ 
+</pre><h3>Mutant 26</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -41,7 +41,7 @@
+         if task["id"] == task_id:
+             task["done"] = True
+             return True
+-    return False
++    return True
+ 
+ 
+ def get_pending_tasks(tasks):
+</pre><h3>Mutant 27</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -46,7 +46,7 @@
+ 
+ def get_pending_tasks(tasks):
+     """Return all tasks that are not yet done."""
+-    pending = []
++    pending = None
+     for i in range(1, len(tasks)):
+         if not tasks[i]["done"]:
+             pending.append(tasks[i])
+</pre><h3>Mutant 28</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -47,7 +47,7 @@
+ def get_pending_tasks(tasks):
+     """Return all tasks that are not yet done."""
+     pending = []
+-    for i in range(1, len(tasks)):
++    for i in range(2, len(tasks)):
+         if not tasks[i]["done"]:
+             pending.append(tasks[i])
+     return pending
+</pre><h3>Mutant 29</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -48,7 +48,7 @@
+     """Return all tasks that are not yet done."""
+     pending = []
+     for i in range(1, len(tasks)):
+-        if not tasks[i]["done"]:
++        if  tasks[i]["done"]:
+             pending.append(tasks[i])
+     return pending
+ 
+</pre><h3>Mutant 30</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -48,7 +48,7 @@
+     """Return all tasks that are not yet done."""
+     pending = []
+     for i in range(1, len(tasks)):
+-        if not tasks[i]["done"]:
++        if not tasks[i]["XXdoneXX"]:
+             pending.append(tasks[i])
+     return pending
+ 
+</pre><h3>Mutant 31</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -55,7 +55,7 @@
+ 
+ def average_priority(tasks):
+     """Return the average priority across all tasks."""
+-    total = 0
++    total = 1
+     for task in tasks:
+         total += task["priority"]
+     ##FINDING 4 zero division error if tasks is empty,
+</pre><h3>Mutant 32</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -55,7 +55,7 @@
+ 
+ def average_priority(tasks):
+     """Return the average priority across all tasks."""
+-    total = 0
++    total = None
+     for task in tasks:
+         total += task["priority"]
+     ##FINDING 4 zero division error if tasks is empty,
+</pre><h3>Mutant 33</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -57,7 +57,7 @@
+     """Return the average priority across all tasks."""
+     total = 0
+     for task in tasks:
+-        total += task["priority"]
++        total = task["priority"]
+     ##FINDING 4 zero division error if tasks is empty,
+     return total / len(tasks)
+ 
+</pre><h3>Mutant 34</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -57,7 +57,7 @@
+     """Return the average priority across all tasks."""
+     total = 0
+     for task in tasks:
+-        total += task["priority"]
++        total -= task["priority"]
+     ##FINDING 4 zero division error if tasks is empty,
+     return total / len(tasks)
+ 
+</pre><h3>Mutant 35</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -57,7 +57,7 @@
+     """Return the average priority across all tasks."""
+     total = 0
+     for task in tasks:
+-        total += task["priority"]
++        total += task["XXpriorityXX"]
+     ##FINDING 4 zero division error if tasks is empty,
+     return total / len(tasks)
+ 
+</pre><h3>Mutant 36</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -59,7 +59,7 @@
+     for task in tasks:
+         total += task["priority"]
+     ##FINDING 4 zero division error if tasks is empty,
+-    return total / len(tasks)
++    return total * len(tasks)
+ 
+ 
+ def find_task_by_title(tasks, title):
+</pre><h3>Mutant 42</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -82,6 +82,6 @@
+     """Apply a loyalty discount for premium users."""
+     #FINDING 7 it's like saying "the light is ON is True,"
+     if is_premium:
+-        return price * 0.8
++        return price / 0.8
+     return price
+ 
+</pre><h3>Mutant 43</h3><pre>--- app/tasks.py
++++ app/tasks.py
+@@ -82,6 +82,6 @@
+     """Apply a loyalty discount for premium users."""
+     #FINDING 7 it's like saying "the light is ON is True,"
+     if is_premium:
+-        return price * 0.8
++        return price * 1.8
+     return price
+ 
+</pre></body></html>

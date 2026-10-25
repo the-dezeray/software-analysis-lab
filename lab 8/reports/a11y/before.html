@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Lab 8 accessibility report - before</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: .5rem; text-align: left; vertical-align: top; }
+  th { background: #f3f3f3; }
+</style>
+</head>
+<body>
+<h1>Lab 8 accessibility report - before</h1>
+<p>Violations: <strong>4</strong> |
+Passes: 27 |
+Incomplete: 0</p>
+<table>
+<thead><tr><th>Rule</th><th>WCAG tags</th><th>Impact</th><th>Nodes</th><th>Help</th><th>Targets</th></tr></thead>
+<tbody><tr><td>color-contrast</td><td>cat.color, wcag2aa, wcag143, TTv5, TT13.c, EN-301-549, EN-9.1.4.3, ACT</td><td>serious</td><td>2</td><td>Elements must meet minimum color contrast ratio thresholds</td><td>[&quot;.muted&quot;]<br>[&quot;.done &gt; span&quot;]</td></tr><tr><td>landmark-one-main</td><td>cat.semantics, best-practice</td><td>moderate</td><td>1</td><td>Document should have one main landmark</td><td>[&quot;html&quot;]</td></tr><tr><td>region</td><td>cat.keyboard, best-practice</td><td>moderate</td><td>7</td><td>All page content should be contained by landmarks</td><td>[&quot;h1&quot;]<br>[&quot;p:nth-child(2)&quot;]<br>[&quot;.muted&quot;]<br>[&quot;#task-input&quot;]<br>[&quot;#priority-input&quot;]<br>[&quot;li[data-title=\&quot;Write report\&quot;] &gt; span&quot;]<br>[&quot;.done &gt; span&quot;]</td></tr><tr><td>select-name</td><td>cat.forms, wcag2a, wcag412, section508, section508.22.n, TTv5, TT5.c, EN-301-549, EN-9.4.1.2, ACT</td><td>critical</td><td>1</td><td>Select element must have an accessible name</td><td>[&quot;#priority-input&quot;]</td></tr></tbody>
+</table>
+</body>
+</html>

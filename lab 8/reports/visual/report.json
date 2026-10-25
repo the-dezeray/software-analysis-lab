@@ -1,0 +1,17 @@
+{
+  "baseline": "reports\\visual\\baseline.png",
+  "current": "reports\\visual\\current.png",
+  "diff": "reports\\visual\\diff.png",
+  "highlight": "reports\\visual\\highlight.png",
+  "width": 1280,
+  "height": 900,
+  "changed_pixels": 37854,
+  "total_pixels": 1152000,
+  "percent": 3.286,
+  "changed_bbox": [
+    320,
+    43,
+    960,
+    376
+  ]
+}

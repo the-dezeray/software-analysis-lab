@@ -9,9 +9,7 @@ def format_task_report(tasks):
     """Build a plain-text report of all tasks."""
     lines = []
     for task in tasks:
-        #FINDING 9 - this is a type error, it is trying to concatenate a string with an int because
-        #fix line = "Task #" + str(task["id"]) + ": " + task["title"]
-        line = "Task #" + task["id"] + ": " + task["title"]
+        line = "Task #" + str(task["id"]) + ": " + task["title"]
         lines.append(line)
     return "\n".join(lines)
 

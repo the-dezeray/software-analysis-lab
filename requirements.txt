@@ -1,1 +1,4 @@
 pytest
+pytest-cov
+mutmut==2.4.0
+Pillow>=10

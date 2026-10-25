@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Lab 8 visual regression report</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 2rem auto; padding: 0 1rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  figure { margin: 0; }
+  img { width: 100%; border: 1px solid #ccc; }
+  figcaption { font-weight: 600; margin-bottom: .3rem; }
+  .score { font-size: 1.3rem; }
+</style>
+</head>
+<body>
+<h1>Lab 8 visual regression report</h1>
+<p class="score">Pixel difference: <strong>3.286%</strong>
+(37854 of 1152000 pixels)</p>
+<p>Changed region: (320, 43, 960, 376)</p>
+<div class="grid">
+  <figure><figcaption>Baseline</figcaption><img src="baseline.png" alt="Baseline screenshot" /></figure>
+  <figure><figcaption>Current</figcaption><img src="current.png" alt="Current screenshot" /></figure>
+  <figure><figcaption>Difference (red)</figcaption><img src="highlight.png" alt="Highlighted difference" /></figure>
+</div>
+</body>
+</html>

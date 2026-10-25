@@ -36,6 +36,11 @@ I keep each lab in its own folder in the repo root:
   `before-after-failure-report.md`, `healing-report.md`, `reflection.md`).
 - `lab 6/` - my AI vs manual coverage work (`assistant.md`, `prompts.md`,
   `comparison.md`, `coverage-*.txt`).
+- `lab 7/` - my mutation testing work (`README.md`, three mutation reports,
+  `surviving-mutants.md`, `final-results.md`, `reflection.md`, and raw
+  logs/HTML reports under `reports/`).
+- `lab 9/` - my exploratory testing session (`charter.md`, `ai-ideas.md`,
+  `session-notes.md`, `session-report.md`).
 
 ## Extra tests I added
 
@@ -46,6 +51,8 @@ I did not delete the starter tests. I added mine next to them:
 - `tests/test_ai_lab6.py` - 8 AI-generated tests for Lab 6.
 - `tests/test_manual_lab6.py` - my 10 manual tests for Lab 6
   (`remove_task`, `find_task_by_title`, `format_task_report`).
+- `tests/test_lab7_mutation_killers.py` - my 3 targeted tests that kill the
+  surviving AI-suite mutants from Lab 7.
 - `lab 5/tests/` - my 5 Playwright tests with POM
   (`test_tasks.py` + `test-data.json` + `pages/task_page.py` +
   `utils/healing.py`). Baseline is 5 passed (~2.4 s).
@@ -55,18 +62,22 @@ Run what I ran:
 ```
 pytest tests/test_discount_lab3.py -v
 pytest tests/test_ai_lab6.py tests/test_manual_lab6.py --cov=app --cov-report=term-missing
+pytest tests/test_ai_lab6.py tests/test_lab7_mutation_killers.py -q
 pytest "lab 5/tests" -v
 pytest "lab 5/tests" --drift -q
 pytest "lab 5/tests" --drift --heal -v
+mutmut run --runner "python -m pytest -x -q tests/test_ai_lab6.py" --tests-dir tests --simple-output --no-progress
 ```
 
-## Changes I made
-
-I left `app/` as-is so my failing outputs stay reproducible for marking.
-My fixes are only written up in `lab 4/defect-log.md` (iterate all tasks,
-`if not tasks: return 0`). What I actually changed:
+Lab 7 needs a green baseline, so I fixed the Lab 6 `format_task_report`
+TypeError in `app/storage.py` before running `mutmut`. The Lab 6 coverage
+files remain the historical record of the pre-fix failing code. My other
+defect fixes are still only written up in `lab 4/defect-log.md` (iterate all
+tasks, `if not tasks: return 0`). What I actually changed:
 
 - Added the test files above, no starter test touched.
+- Fixed `app/storage.py` line 14 (`str(task["id"])`) for the Lab 7 baseline.
+- Added `pyproject.toml` with the `[tool.mutmut]` configuration.
 - Added `lab 5/web/index.html` - my static copy of the task app for
   Playwright to hit. Drift is via `--drift` (`add-btn` -> `add-btn-v2`).
 - Added `lab 5/tests/utils/healing.py` - my fallback engine instead of

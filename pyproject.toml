@@ -1,0 +1,6 @@
+[tool.mutmut]
+# Lab 7 targets: find_task_by_title and remove_task (app/tasks.py)
+# plus format_task_report (app/storage.py).
+paths_to_mutate = "app/tasks.py app/storage.py"
+tests_dir = "tests"
+runner = "python -m pytest -x -q tests/test_ai_lab6.py tests/test_manual_lab6.py"

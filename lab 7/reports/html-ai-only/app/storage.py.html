@@ -1,0 +1,161 @@
+<html><body><h1>app/storage.py</h1>Killed 7 out of 22 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 44</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -2,7 +2,7 @@
+ import datetime
+ 
+ #FINDING 10  - this one is hilarious
+-API_KEY = "sk-test-1234567890abcdef"  # TODO: move to env var before release
++API_KEY = "XXsk-test-1234567890abcdefXX"  # TODO: move to env var before release
+ 
+ 
+ def format_task_report(tasks):
+</pre><h3>Mutant 45</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -2,7 +2,7 @@
+ import datetime
+ 
+ #FINDING 10  - this one is hilarious
+-API_KEY = "sk-test-1234567890abcdef"  # TODO: move to env var before release
++API_KEY = None  # TODO: move to env var before release
+ 
+ 
+ def format_task_report(tasks):
+</pre><h3>Mutant 47</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -9,7 +9,7 @@
+     """Build a plain-text report of all tasks."""
+     lines = []
+     for task in tasks:
+-        line = "Task #" + str(task["id"]) + ": " + task["title"]
++        line = "XXTask #XX" + str(task["id"]) + ": " + task["title"]
+         lines.append(line)
+     return "\n".join(lines)
+ 
+</pre><h3>Mutant 51</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -9,7 +9,7 @@
+     """Build a plain-text report of all tasks."""
+     lines = []
+     for task in tasks:
+-        line = "Task #" + str(task["id"]) + ": " + task["title"]
++        line = "Task #" + str(task["id"]) + "XX: XX" + task["title"]
+         lines.append(line)
+     return "\n".join(lines)
+ 
+</pre><h3>Mutant 55</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -11,7 +11,7 @@
+     for task in tasks:
+         line = "Task #" + str(task["id"]) + ": " + task["title"]
+         lines.append(line)
+-    return "\n".join(lines)
++    return "XX\nXX".join(lines)
+ 
+ 
+ def days_until_due(due_date_str):
+</pre><h3>Mutant 56</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -16,7 +16,7 @@
+ 
+ def days_until_due(due_date_str):
+     """Return the number of days remaining until a task's due date."""
+-    due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%d")
++    due_date = datetime.datetime.strptime(due_date_str, "XX%Y-%m-%dXX")
+     today = datetime.datetime.now()
+     delta = due_date - today
+     return delta.days
+</pre><h3>Mutant 57</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -16,7 +16,7 @@
+ 
+ def days_until_due(due_date_str):
+     """Return the number of days remaining until a task's due date."""
+-    due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%d")
++    due_date = None
+     today = datetime.datetime.now()
+     delta = due_date - today
+     return delta.days
+</pre><h3>Mutant 58</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -17,7 +17,7 @@
+ def days_until_due(due_date_str):
+     """Return the number of days remaining until a task's due date."""
+     due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%d")
+-    today = datetime.datetime.now()
++    today = None
+     delta = due_date - today
+     return delta.days
+ 
+</pre><h3>Mutant 59</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -18,7 +18,7 @@
+     """Return the number of days remaining until a task's due date."""
+     due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%d")
+     today = datetime.datetime.now()
+-    delta = due_date - today
++    delta = due_date + today
+     return delta.days
+ 
+ 
+</pre><h3>Mutant 60</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -18,7 +18,7 @@
+     """Return the number of days remaining until a task's due date."""
+     due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%d")
+     today = datetime.datetime.now()
+-    delta = due_date - today
++    delta = None
+     return delta.days
+ 
+ 
+</pre><h3>Mutant 61</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -24,6 +24,6 @@
+ 
+ def build_query(title_filter):
+     """Build a SQL query to look up tasks by title (used by the reporting DB)."""
+-    query = "SELECT * FROM tasks WHERE title = '" + title_filter + "'"
++    query = "XXSELECT * FROM tasks WHERE title = 'XX" + title_filter + "'"
+     return query
+ 
+</pre><h3>Mutant 62</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -24,6 +24,6 @@
+ 
+ def build_query(title_filter):
+     """Build a SQL query to look up tasks by title (used by the reporting DB)."""
+-    query = "SELECT * FROM tasks WHERE title = '" + title_filter + "'"
++    query = "SELECT * FROM tasks WHERE title = '" - title_filter + "'"
+     return query
+ 
+</pre><h3>Mutant 63</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -24,6 +24,6 @@
+ 
+ def build_query(title_filter):
+     """Build a SQL query to look up tasks by title (used by the reporting DB)."""
+-    query = "SELECT * FROM tasks WHERE title = '" + title_filter + "'"
++    query = "SELECT * FROM tasks WHERE title = '" + title_filter - "'"
+     return query
+ 
+</pre><h3>Mutant 64</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -24,6 +24,6 @@
+ 
+ def build_query(title_filter):
+     """Build a SQL query to look up tasks by title (used by the reporting DB)."""
+-    query = "SELECT * FROM tasks WHERE title = '" + title_filter + "'"
++    query = "SELECT * FROM tasks WHERE title = '" + title_filter + "XX'XX"
+     return query
+ 
+</pre><h3>Mutant 65</h3><pre>--- app/storage.py
++++ app/storage.py
+@@ -24,6 +24,6 @@
+ 
+ def build_query(title_filter):
+     """Build a SQL query to look up tasks by title (used by the reporting DB)."""
+-    query = "SELECT * FROM tasks WHERE title = '" + title_filter + "'"
++    query = None
+     return query
+ 
+</pre></body></html>
